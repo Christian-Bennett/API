@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieInfo.MVC.Models;
+using System.Net.Http;
 
 namespace MovieInfo.MVC.Controllers
 {
@@ -18,10 +19,11 @@ namespace MovieInfo.MVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public string Index()
+    {
+      var client = new HttpClient();
+      return client.GetAsync("http://localhost:5000/sw").GetAwaiter().GetResult().ToString();
+    }
 
         public IActionResult Privacy()
         {
